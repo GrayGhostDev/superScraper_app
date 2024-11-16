@@ -1,0 +1,23 @@
+export const ACCIDENT_KEYWORDS = [
+  'accident',
+  'collision',
+  'crash',
+  'incident',
+  'emergency',
+  'injury',
+  'vehicle',
+  'traffic',
+  'road',
+  'highway',
+  'intersection',
+  'ambulance',
+  'police',
+  'fire',
+  'rescue',
+  'blocked',
+  'closure',
+  'detour',
+  'delay',
+  'backup',
+  'congestion'
+];
