@@ -18,7 +18,7 @@
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@tensorflow/tfjs": "^4.17.0",
     "@tensorflow/tfjs-vis": "^1.5.1",
-    "@turf/turf": "^6.5.0",
+    "@turf/turf": "^7.1.0",
     "2captcha": "^3.0.7",
     "anticaptcha": "^2.0.5",
     "axios": "^1.6.7",
