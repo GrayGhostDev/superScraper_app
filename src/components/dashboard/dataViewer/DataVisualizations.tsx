@@ -1,8 +1,8 @@
 import React from 'react';
-import { PDLRecord } from '../../../types/pdl';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { Brain, TrendingUp, Activity } from 'lucide-react';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useAnalytics } from '../../../hooks/useAnalytics';
+import { PDLRecord } from '../../../types/pdl';
 
 interface DataVisualizationsProps {
   data: PDLRecord[];
@@ -12,17 +12,6 @@ const COLORS = ['#4F46E5', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 export const DataVisualizations: React.FC<DataVisualizationsProps> = ({ data }) => {
   const { trends, isAnalyzing } = useAnalytics(data);
-
-  if (isAnalyzing) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="flex items-center gap-2">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
-          <span className="text-gray-600">Analyzing data...</span>
-        </div>
-      </div>
-    );
-  }
 
   const industryData = data.reduce((acc: Record<string, number>, record) => {
     if (record.industry) {
@@ -44,6 +33,17 @@ export const DataVisualizations: React.FC<DataVisualizationsProps> = ({ data }) 
     acc[rangeKey] = (acc[rangeKey] || 0) + 1;
     return acc;
   }, {});
+
+  if (isAnalyzing) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="flex items-center gap-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+          <span className="text-gray-600">Analyzing data...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -146,22 +146,6 @@ export const DataVisualizations: React.FC<DataVisualizationsProps> = ({ data }) 
                 )}
               </div>
             ))}
-          </div>
-
-          {/* Temporal Analysis */}
-          <div className="mt-6">
-            <h4 className="text-sm font-medium text-gray-700 mb-4">Temporal Analysis</h4>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={trends.temporal.trend}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="timestamp" tickFormatter={(value) => new Date(value).toLocaleDateString()} />
-                  <YAxis />
-                  <Tooltip labelFormatter={(value) => new Date(value).toLocaleString()} />
-                  <Line type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
           </div>
         </div>
       )}

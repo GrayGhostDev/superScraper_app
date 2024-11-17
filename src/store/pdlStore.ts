@@ -10,6 +10,14 @@ interface PDLState {
   error: string | null;
   fetchData: () => Promise<void>;
   updateSearchParams: (params: Partial<PDLSearchParams>) => void;
+  rateLimits?: {
+    remaining: {
+      minute?: number;
+      day?: number;
+      month?: number;
+    };
+    total?: number;
+  };
 }
 
 export const usePDLStore = create<PDLState>((set, get) => ({
@@ -17,6 +25,7 @@ export const usePDLStore = create<PDLState>((set, get) => ({
   searchParams: DEFAULT_SEARCH_PARAMS,
   isLoading: false,
   error: null,
+  rateLimits: undefined,
 
   fetchData: async () => {
     const { searchParams } = get();
@@ -24,16 +33,22 @@ export const usePDLStore = create<PDLState>((set, get) => ({
 
     try {
       const results = await pdlService.searchPeople(searchParams);
+      
+      // Filter results based on minimum match score
+      const filteredResults = results.filter(
+        record => record.match_score >= searchParams.minMatchScore
+      );
+
       set({ 
-        data: results,
+        data: filteredResults,
         isLoading: false,
         error: null
       });
       
-      if (results.length === 0) {
+      if (filteredResults.length === 0) {
         notifications.show('No results found', 'info');
       } else {
-        notifications.show(`Found ${results.length} results`, 'success');
+        notifications.show(`Found ${filteredResults.length} results`, 'success');
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to fetch data';

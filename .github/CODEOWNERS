@@ -1,0 +1,18 @@
+* @project-maintainers
+
+# Frontend related files
+/src/components/ @frontend-team
+/src/hooks/ @frontend-team
+/src/store/ @frontend-team
+
+# Backend and API related files
+/src/lib/ @backend-team
+/src/services/ @backend-team
+
+# Configuration files
+*.config.* @devops-team
+/vite.config.ts @devops-team
+/.github/ @devops-team
+
+# Documentation
+*.md @docs-team

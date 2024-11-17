@@ -6,23 +6,15 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthScreen } from './components/auth/AuthScreen';
 import { UnauthenticatedApp } from './components/auth/UnauthenticatedApp';
 
-// Get the Clerk publishable key from environment variables
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-// Validate the Clerk key format
-const isValidClerkKey = (key: string | undefined): boolean => {
-  if (!key) return false;
-  return /^pk_(live|test)_[a-zA-Z0-9]+$/.test(key);
-};
-
 function App() {
-  // Show UnauthenticatedApp if no key or invalid key format
-  if (!isValidClerkKey(clerkPubKey)) {
-    return <UnauthenticatedApp reason={!clerkPubKey ? 'missing' : 'invalid'} />;
+  if (!clerkPubKey) {
+    return <UnauthenticatedApp reason="missing" />;
   }
 
   return (
-    <ErrorBoundary fallback={<UnauthenticatedApp reason="error" />}>
+    <ErrorBoundary>
       <ClerkProvider 
         publishableKey={clerkPubKey}
         navigate={(to) => window.history.pushState(null, '', to)}

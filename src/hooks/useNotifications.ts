@@ -11,7 +11,7 @@ export const useNotifications = (options?: {
   );
 
   useEffect(() => {
-    const unsubscribe = notificationService.subscribe((updatedNotifications) => {
+    const unsubscribe = notificationService.subscribe((_updatedNotifications) => {
       setNotifications(
         notificationService.getNotifications(options)
       );

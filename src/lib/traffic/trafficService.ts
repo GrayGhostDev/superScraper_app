@@ -171,7 +171,7 @@ export class TrafficService {
     return Math.min(Math.round((total / incidents.length) * 100), 100) || 0;
   }
 
-  private calculateAverageSpeed(incidents: TrafficIncident[]): number {
+  private calculateAverageSpeed(_incidents: TrafficIncident[]): number {
     // Implementation would depend on available speed data
     return 35; // Mock value
   }
