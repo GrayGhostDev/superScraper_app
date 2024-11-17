@@ -35,7 +35,7 @@
     "ml-random-forest": "^2.1.0",
     "ml-regression": "^5.0.0",
     "natural": "^6.10.4",
-    "p-limit": "^5.0.0",
+    "p-limit": "^6.1.0",
     "p-retry": "^6.2.0",
     "pdf-lib": "^1.17.1",
     "peopledatalabs": "^9.3.7",
