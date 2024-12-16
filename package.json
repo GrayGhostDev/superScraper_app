@@ -62,7 +62,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@eslint/js": "^8.56.0",
+    "@eslint/js": "^9.17.0",
     "@playwright/test": "^1.42.1",
     "@types/mapbox__mapbox-gl-draw": "^1.4.6",
     "@types/mapbox__mapbox-gl-geocoder": "^4.7.7",
