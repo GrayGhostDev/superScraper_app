@@ -27,7 +27,7 @@
     "date-fns": "^3.3.1",
     "http-proxy-middleware": "^2.0.6",
     "jsonld": "^8.3.2",
-    "lucide-react": "^0.344.0",
+    "lucide-react": "^0.469.0",
     "mapbox-gl": "^3.1.2",
     "ml-kmeans": "^6.0.0",
     "ml-matrix": "^6.11.0",
